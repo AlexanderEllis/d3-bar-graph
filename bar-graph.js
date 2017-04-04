@@ -61,7 +61,9 @@
 
         svg.append('g')
             .attr('transform', 'translate(0,' + y(0) + ')')
-            .call(d3.axisBottom(x).tickValues(x.domain().filter((d, i) => !(i%20) )));
+            .call(d3.axisBottom(x)
+                .tickValues(x.domain().filter((d, i) => !(+d.slice(0, 4)%5) && (d.slice(5,7) === '01') ))
+                .tickFormat(d => d.slice(0, 4)));
 
 
         svg.append('g')
