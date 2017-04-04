@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <style>
+            body {
+            display: flex;
+            justify-content: center;
+            }
+
+            #container {
+            margin: 0 auto;
+            margin-top: 88px;
+            }
+
+            .chart rect {
+            fill: steelblue;
+            }
+
+            .chart rect:hover {
+            fill: #005384;
+            }
+
+            .axis text {
+            font: 10px sans-serif;
+            }
+
+            .axis path,
+            .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <svg class='chart'></svg>
+        </div>
+        <script src="bar-graph.js"></script>
+    </body>
+</html
