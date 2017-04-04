@@ -1,0 +1,74 @@
+This is a roughly line-by-line walkthrough of my code.  I suggest
+opening this document in a split-pane view with bar-graph.js in the other
+pane.  The line numbers match.
+
+
+This initializes the chart and accesses its height and width.
+
+
+
+
+
+
+I start by initializing the sizing values for the svg with a margin object.
+
+
+I then create the ranges. A band scale is like an ordinal scale, but the output
+range is continuous and numeric.  Output values are computed by dividing the
+continous range (the input in .range()) into uniform bands (think bar graph).
+
+Here, the range values go from height to zero because SVG coordinates are from 
+the top left, so we want values to start at the bottom of the chart.
+
+
+
+
+Define the URL to the JSON data we'll use for the project
+
+This creates a get request to the url with the passed callback.  Here, data is 
+the JSON that is returned, and we want to access the 'data' key, so data.data
+
+This defines the domain for each using functions.  X gets the date information,
+and y gets the value (coerced to number with the +)
+
+
+
+
+This selects all 'g' elements, which don't really exist yet.  
+We pass in the json data.
+Given that the data is incoming, we tell it to append a 'g' element for each element
+in the array, with the transform element dependent on the data inside the element.
+It calls x( d[0] ) to get the appropriate transformation mapping for the translate
+
+
+
+This then appends a 'rect' element to each of the 'g' elements.
+The y value is determined by passing the data's numeric value to the y scale.
+The height is similarly defined, but as the svg height minus the y value
+Every rect will have the same width, so we can access that from x with x.bandwidth()
+
+It then creates the event listeners for the tooltip.  The tooltip is a separate 
+element on the body, and when mouseover a rectangle, it makes the tooltip visible
+with the html from the rectangle.  This also updates its top and left stylings from
+the mouse event in order to keep it hovering close to the mouse.  When the mouse
+leaves the rectangle, this hides the tooltip.
+
+
+
+
+
+This then adds the tooltip to the body with various stylings.
+
+
+
+
+
+
+
+
+
+
+I'm currently stuck on the next part, but let's walk through it.
+
+
+
