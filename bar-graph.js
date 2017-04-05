@@ -1,7 +1,7 @@
     
     let svg = d3.select( 'svg' );
         
-    let margin = { top: 20, right: 30, bottom: 30, left: 60 };
+    let margin = { top: 70, right: 20, bottom: 70, left: 70 };
     let width =  +svg.attr('width');
     let height = +svg.attr('height');
     
@@ -10,7 +10,7 @@
     let URL = 'https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/GDP-data.json'
 
     d3.json(URL,  function( error, data ) {
-    
+
         let x = d3.scaleBand()
             .rangeRound( [margin.left, width - margin.right] )
             .paddingInner( .1 );
@@ -60,7 +60,7 @@
 
 
         svg.append('g')
-            .attr('transform', 'translate(0,' + y(0) + ')')
+            .attr('transform', 'translate(0,' + (height - margin.bottom) + ')')
             .call(d3.axisBottom(x)
                 .tickValues(x.domain().filter((d, i) => !(+d.slice(0, 4)%5) && (d.slice(5,7) === '01') ))
                 .tickFormat(d => d.slice(0, 4)));
@@ -69,5 +69,23 @@
         svg.append('g')
             .attr('transform', 'translate(' + margin.left + ',0)')
             .call(d3.axisLeft(y).ticks(6));
+
+        svg.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('transform', 'translate(' + (margin.left / 4) + ',' + (height / 2) + ')rotate(-90)')
+            .attr('font-size', '14px')
+            .text('GDP (in billions of dollars)');
+
+        svg.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('transform', 'translate(' + (width / 2) + ',' + (height - margin.bottom / 4) + ')')
+            .attr('font-size', '20px')
+            .text('Year');
+        
+        svg.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('transform', 'translate(' + (width / 2) + ',' + (margin.top / 2) + ')')
+            .attr('font-size', '30px')
+            .text('US Gross Domestic Product By Quarter');
 
     });
